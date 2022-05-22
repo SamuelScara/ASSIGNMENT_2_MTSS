@@ -74,4 +74,16 @@ public class BillTest {
         }
 
     }
+
+    @Test
+    public void testDiscount5Proc() throws BillException{
+        itemsOrdered.add(new EItem(EItem.category.Processore, "Intel Core i5-9500", 192.40));
+        itemsOrdered.add(new EItem(EItem.category.Processore, "Amd 7452", 2552.30));
+        itemsOrdered.add(new EItem(EItem.category.Processore, "Amd Ryzen Box 3500", 166.20));
+        itemsOrdered.add(new EItem(EItem.category.Processore, "Amd Ryzen 5 5500", 134.10));
+        itemsOrdered.add(new EItem(EItem.category.Processore, "Intel Box Core i5 5-12600KF", 262.40));
+        itemsOrdered.add(new EItem(EItem.category.Processore, "Amd Ryzen 9 5950X", 516));
+
+        assertEquals(3756.35, bill.getOrderPrice(itemsOrdered, user), 1e-4);
+    }
 }
