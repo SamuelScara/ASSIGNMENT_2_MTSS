@@ -114,4 +114,12 @@ public class BillTest {
 
         assertEquals(569.62, bill.getOrderPrice(itemsOrdered, user), 1e-4);
     }
+
+    @Test
+    public void testDiscount1000() throws BillException{
+        itemsOrdered.add(new EItem(EItem.category.Tastiera, "Logitech G915 LIGHTSPEED TKL", 269.40));
+        itemsOrdered.add(new EItem(EItem.category.Processore, "Intel Box Core i5 5-12600KF", 262.40));
+        itemsOrdered.add(new EItem(EItem.category.Processore, "Amd 7452", 2552.30));
+        assertEquals(2775.69, bill.getOrderPrice(itemsOrdered, user), 1e-4);
+    }
 }

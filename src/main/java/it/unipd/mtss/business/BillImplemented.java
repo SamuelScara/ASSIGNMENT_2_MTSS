@@ -70,6 +70,9 @@ public class BillImplemented implements Bill {
             }
             return totale;
         }
+        if(totale > 1000){
+            totale = totale * 0.9;
+        }
         return totale;
     }
 }
