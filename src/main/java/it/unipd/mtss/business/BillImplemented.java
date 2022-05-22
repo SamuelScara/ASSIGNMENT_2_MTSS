@@ -30,6 +30,9 @@ public class BillImplemented implements Bill {
         if (user == null) {
             throw new BillException("L'utente inserito è uguale a null");
         }
+        if(itemsOrdered.size() > 30){
+            throw new BillException("Ci sono piu di 30 oggetti ordinati");
+        }
         for (EItem item : itemsOrdered) {
             if(item.getItemType() == EItem.category.Processore){
                 countProc = countProc + 1;
@@ -72,6 +75,7 @@ public class BillImplemented implements Bill {
         }
         if(totale > 1000){
             totale = totale * 0.9;
+            return totale;
         }
         return totale;
     }

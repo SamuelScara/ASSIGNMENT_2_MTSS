@@ -122,4 +122,16 @@ public class BillTest {
         itemsOrdered.add(new EItem(EItem.category.Processore, "Amd 7452", 2552.30));
         assertEquals(2775.69, bill.getOrderPrice(itemsOrdered, user), 1e-4);
     }
+
+    @Test
+    public void test30Items(){
+        for(int i = 0; i< 31; i++){
+            itemsOrdered.add(new EItem(EItem.category.Tastiera, "Tastiera", 50));
+        }
+        try{
+            bill.getOrderPrice(itemsOrdered, user);
+        }catch(BillException exc){
+            assertEquals("Ci sono piu di 30 oggetti ordinati", exc.getMessage());
+        }
+    }
 }
