@@ -134,4 +134,11 @@ public class BillTest {
             assertEquals("Ci sono piu di 30 oggetti ordinati", exc.getMessage());
         }
     }
+
+    @Test
+    public void test2euroTax() throws BillException{
+        itemsOrdered.add(new EItem(EItem.category.Mouse, "Mouse", 4.99));
+
+        assertEquals(6.99, bill.getOrderPrice(itemsOrdered, user), 1e-4);
+    }
 }
