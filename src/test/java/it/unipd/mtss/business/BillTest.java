@@ -30,12 +30,11 @@ public class BillTest {
 
     @Test
     public void testSum() throws BillException{
-        itemsOrdered.add(new EItem(EItem.category.Mouse, "Logitech", 60.50));
         itemsOrdered.add(new EItem(EItem.category.Scheda_Madre, "Asrock", 267.35));
         itemsOrdered.add(new EItem(EItem.category.Processore, "Intel", 156.43));
         itemsOrdered.add(new EItem(EItem.category.Tastiera, "Razer", 98.99));
 
-        assertEquals(583.27, bill.getOrderPrice(itemsOrdered, user), 1e-4);
+        assertEquals(522.77, bill.getOrderPrice(itemsOrdered, user), 1e-4);
     }
 
 
@@ -102,5 +101,17 @@ public class BillTest {
         itemsOrdered.add(new EItem(EItem.category.Mouse, "Asus Rog Spatha", 132));
 
         assertEquals(701.34, bill.getOrderPrice(itemsOrdered, user), 1e-4);
+    }
+
+    @Test
+    public void testDiscountMouseKey() throws BillException{
+        itemsOrdered.add(new EItem(EItem.category.Mouse, "Roccat Burst Core", 34));
+        itemsOrdered.add(new EItem(EItem.category.Mouse, "Razer Viper 8K", 69.42));
+        itemsOrdered.add(new EItem(EItem.category.Mouse, "Corsair Dark Core RGB Pro Wireless", 110.50));
+        itemsOrdered.add(new EItem(EItem.category.Tastiera, "MSI Vigor GK20", 24));
+        itemsOrdered.add(new EItem(EItem.category.Tastiera, "Cooler Master CK530 V2", 86.30));
+        itemsOrdered.add(new EItem(EItem.category.Tastiera, "Logitech G915 LIGHTSPEED TKL", 269.40));
+
+        assertEquals(569.62, bill.getOrderPrice(itemsOrdered, user), 1e-4);
     }
 }

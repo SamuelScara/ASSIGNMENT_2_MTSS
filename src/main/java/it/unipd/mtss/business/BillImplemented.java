@@ -12,11 +12,14 @@ import it.unipd.mtss.model.EItem;
 
 public class BillImplemented implements Bill {
     public double getOrderPrice(List<EItem> itemsOrdered, User user) throws BillException {
-        double totale = 0.0;
+        double totale = 0.0D;
         int countProc = 0;
         int countMouse = 0;
+        int countTastiere = 0;
         double menoCaroMouse = Double.MAX_VALUE;
         double menoCaro = Double.MAX_VALUE; //processore
+        double menoCaroTastiere = Double.MAX_VALUE;
+        double totaleMouseTastiere = 0.0D;
 
         if (itemsOrdered == null) {
             throw new BillException("La lista degli item ordinati è uguale a null");
@@ -33,19 +36,39 @@ public class BillImplemented implements Bill {
                 if(item.getPrice() < menoCaro){
                     menoCaro = item.getPrice();
                 }
-            }else if(item.getItemType() == EItem.category.Mouse){
+            }
+            if(item.getItemType() == EItem.category.Mouse){
+                totaleMouseTastiere = totaleMouseTastiere + item.getPrice();
                 countMouse = countMouse + 1;
                 if(item.getPrice() < menoCaroMouse){
                     menoCaroMouse = item.getPrice();
+                }
+            }
+            if(item.getItemType() == EItem.category.Tastiera){
+                totaleMouseTastiere = totaleMouseTastiere + item.getPrice();
+                countTastiere = countTastiere + 1;
+                if(item.getPrice() < menoCaroTastiere){
+                    menoCaroTastiere = item.getPrice();
                 }
             }
             totale = totale + item.getPrice();
         }
         if(countProc > 5){
             totale = totale - (menoCaro / 2);
+            return totale;
         }
         if(countMouse > 10){
             totale = totale - menoCaroMouse;
+            return totale;
+        }
+
+        if(countTastiere == countMouse){
+            if(menoCaroMouse <= menoCaroTastiere){
+                totale = totale - menoCaroMouse;
+            }else{
+                totale = totale - menoCaroTastiere;
+            }
+            return totale;
         }
         return totale;
     }
