@@ -86,4 +86,21 @@ public class BillTest {
 
         assertEquals(3756.35, bill.getOrderPrice(itemsOrdered, user), 1e-4);
     }
+
+    @Test
+    public void testGiftCheapestMouse() throws BillException{
+        itemsOrdered.add(new EItem(EItem.category.Mouse, "Roccat Burst Core", 34));
+        itemsOrdered.add(new EItem(EItem.category.Mouse, "Razer Viper 8K", 69.42));
+        itemsOrdered.add(new EItem(EItem.category.Mouse, "Corsair Dark Core RGB Pro Wireless", 110.50));
+        itemsOrdered.add(new EItem(EItem.category.Mouse, "Steelseries Rival 5", 44.20));
+        itemsOrdered.add(new EItem(EItem.category.Mouse, "Razer Basilisk V3", 62.42));
+        itemsOrdered.add(new EItem(EItem.category.Mouse, "Razer Basilisk X Hyperspeed", 50));
+        itemsOrdered.add(new EItem(EItem.category.Mouse, "Corsair Sabre Pro", 44.90));
+        itemsOrdered.add(new EItem(EItem.category.Mouse, "Logitech G305 Lightspeed", 33.40));
+        itemsOrdered.add(new EItem(EItem.category.Mouse, "Cooler Master MM720", 32));
+        itemsOrdered.add(new EItem(EItem.category.Mouse, "Razer Viper Ultimate", 120.50));
+        itemsOrdered.add(new EItem(EItem.category.Mouse, "Asus Rog Spatha", 132));
+
+        assertEquals(701.34, bill.getOrderPrice(itemsOrdered, user), 1e-4);
+    }
 }

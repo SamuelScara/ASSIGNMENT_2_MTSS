@@ -14,7 +14,9 @@ public class BillImplemented implements Bill {
     public double getOrderPrice(List<EItem> itemsOrdered, User user) throws BillException {
         double totale = 0.0;
         int countProc = 0;
-        double menoCaro = Double.MAX_VALUE;
+        int countMouse = 0;
+        double menoCaroMouse = Double.MAX_VALUE;
+        double menoCaro = Double.MAX_VALUE; //processore
 
         if (itemsOrdered == null) {
             throw new BillException("La lista degli item ordinati è uguale a null");
@@ -31,11 +33,19 @@ public class BillImplemented implements Bill {
                 if(item.getPrice() < menoCaro){
                     menoCaro = item.getPrice();
                 }
+            }else if(item.getItemType() == EItem.category.Mouse){
+                countMouse = countMouse + 1;
+                if(item.getPrice() < menoCaroMouse){
+                    menoCaroMouse = item.getPrice();
+                }
             }
             totale = totale + item.getPrice();
         }
         if(countProc > 5){
             totale = totale - (menoCaro / 2);
+        }
+        if(countMouse > 10){
+            totale = totale - menoCaroMouse;
         }
         return totale;
     }
